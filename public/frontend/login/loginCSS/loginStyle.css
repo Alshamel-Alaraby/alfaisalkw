@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo:300&display=swap&subset=arabic');
+
+* {
+    font-family: 'Cairo', sans-serif;
+}
+
+#m_login {
+
+background-color: #04040469 !important;
+}
+
+.m-login.m-login--2 .m-login__wrapper .m-login__container {
+
+    width: auto !important;
+    height: auto !important;
+}
+
+/* .m-login.m-login--2 .m-login__wrapper {
+
+    padding: 4rem 2rem 0rem 2rem !important;
+} */
+
+.m-login__logo {
+
+    margin: 62px auto 0 auto !important;
+}
+
+.m-login__logo img {
+
+    width: 200px !important;
+}
+
+.m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group .form-control {
+
+    border-radius: 5px !important;
+    padding: 1.8rem 1.5rem !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-1 .m-login__container .m-login__form .form-control {
+
+    background: rgba(66, 55, 59, 0.48) !important;
+    font-size: initial !important;
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-1 .m-login__container .m-login__head .m-login__desc {
+
+    color: #db0b61 !important;
+    font-size: initial !important;
+    font-weight: 600 !important;
+}
+
+.btn.m-btn--custom {
+    padding: 1rem 4rem !important;
+    font-size: 1.2rem !important;
+    font-family: unset !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+    background-color: #DB0B61 ;
+}
+
+.m-login.m-login--2.m-login-2--skin-1 .m-login__container .m-login__account .m-login__account-link:hover {
+
+    color: #DB0B61 !important;
+}
+
+.overlay_div {
+
+    background: rgba(255, 255, 255, 0.55) !important;
+}
+
+#m_login_signup_cancel {
+    /* padding: 14px 73px !important; */
+    margin-right: 3px !important;
+    background-color: #DB0B6100 ;
+}
+#m_login_signup_cancel:hover{
+    background-color: #DB0B61;
+    color: #fff;
+}
+@media (max-width: 619px) {
+    #m_login_signup_cancel , .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form-action .btn {
+        padding: 12px 35px !important;
+    }
+}
+#m_login_forget_password_cancel{
+    padding: 14px 51px !important;
+    margin-right: 3px !important;
+    background-color: #DB0B6100 !important;
+}
+
+
+@media (max-width: 618px) {
+    .m-login.m-login--2 .m-login__wrapper .m-login__container {
+        width: 305px !important;
+    }
+
+    .m-login__logo img {
+
+        width: 152px !important;
+    }
+}
+.arInputStyle{
+text-align: right;
+}
+.eninputStyle{
+    text-align: left;
+}
+.enStyle{
+    direction: ltr;
+}
+.copyright{
+    text-align: center;color: #ddd; margin: 0px 0 10px 0;
+}
+.copyright a{
+    font-weight: 700;
+    color: #ddd;
+    text-decoration: underline;
+}

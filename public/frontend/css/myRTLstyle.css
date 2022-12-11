@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Lemonada&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cairo:300&display=swap&subset=arabic');
+@import url('https://fonts.googleapis.com/css?family=Aref+Ruqaa&display=swap');
+
+*{
+    font-family: 'Cairo', sans-serif;
+}
+
+.page-404-section .text-size-medium:not(:last-child) {
+    margin-left: 330px !important;
+    font-size: 86px;
+    line-height: 110px;
+    font-family: 'Lemonada', cursive;
+    font-weight: 200;}
+
+.page-404-section h1.title {
+            font-size: 22em;}

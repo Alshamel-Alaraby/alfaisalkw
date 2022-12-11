@@ -1,0 +1,245 @@
+
+/****************** DASHBOARD STYLE **************/
+
+.kt-iconbox__icon  i{
+
+  color: #f05f78 !important;
+  font-size: 38px !important;
+}
+
+.fc-unthemed .fc-event .fc-title{
+  color: #fff !important;
+}
+
+.kt-iconbox__content{
+
+  color: #f05f78 !important;
+  font-size: 16px !important;
+   font-weight: 500 !important;
+}
+
+.calbg{
+
+  background-image: url("georgia-de-lotz-1n_HNfGVBxE-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link{
+
+  background-color: #fd397a !important;
+
+}
+
+
+.fc-unthemed .fc-toolbar .fc-button.fc-button-active{
+  background: #fd397a !important;
+  border: 1px solid #fd397a !important;
+}
+
+.fc-unthemed .fc-toolbar h2{
+
+  font-size: 2.2rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  color: #fd397a !important;
+}
+
+#calendar{
+  padding-top: 35px;
+  background-color: #eeeff538 !important;
+}
+
+.fc-unthemed .fc-toolbar .fc-button{
+
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.fc-unthemed td{
+
+  border-color: #74788d !important;
+}
+
+.fc-unthemed th{
+
+  border-color: #74788d !important;
+}
+
+.fc-unthemed th.fc-day-header > span {
+  color: #545152 !important ;
+  font-size: large !important;
+  font-weight: 800;
+}
+
+.fc-day-number{
+
+  color: #545152 !important;
+  font-weight: bold !important;
+  font-size: initial !important;
+
+}
+
+@media (max-width: 1024px){
+  .kt-header-mobile--fixed .kt-header-mobile{
+
+  height: 90px !important;}
+
+  .kt-subheader--transparent .kt-subheader{
+
+    margin-top: 58px !important;
+}
+
+}
+
+.kt-subheader--transparent .kt-subheader{
+
+  margin-top: 40px !important;
+}
+
+#kt_aside_brand{
+  height: 95px !important;
+}
+
+.kt-scrolltop{
+  background: #f05f78 !important;
+
+}
+
+
+/****************** DATA TABLE DESIGN ************/
+
+.btn-primary{
+  background-color: #f05f78 !important;
+  border-color: #f05f78 !important;
+  padding: 8px !important;
+  border-radius: 4px !important;
+}
+
+@media (max-width: 766px){
+  .btn-primary{
+    padding: 3px !important;
+  }
+
+  .dataTables_wrapper .child .dtr-details > li:last-child .dtr-data{
+    display: inline-grid !important;
+  }
+
+}
+
+.dataTables_wrapper .pagination .page-item.active > .page-link{
+  background: #f05f78 !important;
+}
+
+.pinkbutton{
+
+  background: #f05f78 !important;
+  padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
+
+}
+
+.pinkbutton:hover{
+
+  color: #f05f78 !important;
+  background-color: white !important;
+  border: 2px solid #f05f78 !important;
+
+}
+
+.redbutton{
+ 
+  background: #e02929 !important;
+  padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
+
+}
+
+.redbutton:hover{
+
+  color: #e02929 !important;
+  background-color: white !important;
+  border: 2px solid #e02929 !important;
+
+}
+
+.bluebutton{
+  
+  background: #2b65c5 !important;
+  padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
+
+}
+
+.bluebutton:hover{
+
+  color: #2b65c5 !important;
+  background-color: white !important;
+  border: 2px solid #2b65c5 !important;
+
+}
+
+.greenbutton{
+  
+  background: #128a42ab !important;
+  padding: 5px 10px 5px 10px; border-radius: 20px; color: white !important;
+
+}
+
+.greenbutton:hover{
+
+  color: #128a42ab !important;
+  background-color: white !important;
+  border: 2px solid #128a42ab !important;
+
+}
+
+.purplebutton{
+  
+  background: #450f9c9c !important;
+  padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
+
+}
+
+.purplebutton:hover{
+
+  color: #450f9c9c !important;
+  background-color: white !important;
+  border: 2px solid #450f9c9c !important;
+
+}
+
+.kt-portlet .kt-portlet__head.kt-portlet__head--noborder{
+
+  padding-top: 27px !important;
+  padding-bottom:27px !important
+}
+
+#example_wrapper{
+
+  padding-bottom:30px !important;
+}
+
+.tdesign{
+
+  padding:15px !important;
+  border:1px solid #eee !important;
+}
+.ttdesign{
+
+  padding:15px !important;
+  border:1px solid #eee !important;
+  display: flex !important;
+}
+@media (max-width: 480px){
+.buffut_tap{
+  display: block !important;
+}
+.buffut_tap .kt-portlet__head-label{
+  margin: 20px 0;
+}
+.buffut_images{
+  width: 100% !important;
+}
+.kt-portlet__body p img , .kt-portlet__body h2 img , .kt-portlet__body pre{
+  width: 100% !important;
+}
+}
