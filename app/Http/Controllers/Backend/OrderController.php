@@ -62,7 +62,6 @@ class OrderController extends BaseController
                     throw new \Exception("الكمية المطلوبة من $itm->name لا تكفي");
                 }
             }
-            dd ('000');
             $order = Order::create($input);
             $order->details()->attach($input['detail']);
             $order->setStatus(request('status'), request('comment'));
