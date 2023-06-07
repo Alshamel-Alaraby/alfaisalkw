@@ -14,6 +14,12 @@
                 <div class="form-group ">
                     <label>الفترة من</label>
                     <input autocomplete="off" style="direction: rtl;" name="fromdate" value="{{request()->fromdate}}" type="date" class="form-control">
+
+                    {{--  <input type="date" id="dt" name="fromdate" value="2023-06-01" onchange="mydate1();" hidden/>  --}}
+
+                    {{--  <input type="date" name="input1" placeholder="YYYY-MM-DD" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="Enter a date in this formart YYYY-MM-DD"/>  --}}
+
+
                 </div>
             </div>
             <div class="col-md-3">

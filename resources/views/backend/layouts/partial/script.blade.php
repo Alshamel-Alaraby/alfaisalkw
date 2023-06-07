@@ -1,5 +1,5 @@
-
-<div rel="fadeInDown" id="addPersonModal" class="modal modalDialog" style="overflow:hidden;" role="dialog" aria-labelledby="myModalLabel">
+<div rel="fadeInDown" id="addPersonModal" class="modal modalDialog" style="overflow:hidden;" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog" style="width: 70%;">
         <div class="modal-content">
             <div class="modal-body">
@@ -49,7 +49,8 @@
 <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 {{--<script src="{{asset('backend')}}/js/charts/Chart.bundle.min.js"></script>
 <script src="{{asset('backend')}}/js/charts/Chart.min.js"></script>--}}
-<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
 </script>
 {{--<script src="{{asset('backend')}}/calendar/main1.js"></script>
 <script src="{{asset('backend')}}/calendar/main2.js"></script>
@@ -59,6 +60,25 @@
 <!-- Select2 -->
 <script src="{{asset('backend')}}/select2/js/select2.full.min.js"></script>
 <script>
+    function mydate()
+    {
+      //alert("");
+    document.getElementById("dt").hidden=false;
+    document.getElementById("ndt").hidden=true;
+    }
+    function mydate1()
+    {
+     d=new Date(document.getElementById("dt").value);
+    dt=d.getDate();
+    mn=d.getMonth();
+    mn++;
+    yy=d.getFullYear();
+    document.getElementById("ndt").value=dt+"/"+mn+"/"+yy
+    document.getElementById("ndt").hidden=false;
+    document.getElementById("dt").hidden=true;
+    }
+
+    
     @if (session()->has('alert-success'))
         toastr.success("{{session('alert-success')}}");
     @elseif (session()->has('alert-danger'))
@@ -130,5 +150,7 @@
         $("ul.kt-menu__nav  li.kt-menu__item--active").removeClass('kt-menu__item--active');
         $('a[href="'+current+'"]').closest('li').addClass('kt-menu__item--active');
     });
+
+
 </script>
 @stack('js')

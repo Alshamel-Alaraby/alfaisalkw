@@ -1,9 +1,10 @@
-
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
             <label for="contract_number">رقم العقد</label>
-            <input id="contract_number" class="form-control" name="contract_number" value="{{$order->contract_number??''}}">
+            <input id="contract_number" class="form-control" name="contract_number"
+                value="{{ old('contract_number', $order->contract_number ?? '') }}">
+
         </div>
     </div>
 </div>
@@ -15,11 +16,13 @@
                 <select name="client_id" id="client_id" class="form-control select2" required>
                     <option value="">--- إختر العميل ---</option>
                     @foreach ($clients as $client)
-                        <option mobile="{{$client->mobile}}" address="{{$client->address}}" @if($client->id==$order->client_id) selected @endif value="{{ $client->id }}">{{ $client->name }}</option>
+                    <option mobile="{{$client->mobile}}" address="{{$client->address}}" @if($client->
+                        id==$order->client_id) selected @endif value="{{ $client->id }}">{{ $client->name }}</option>
                     @endforeach
                 </select>
                 <div class="input-group-addon no-print" style="padding: 19px 5px;">
-                    <a href="#" data-remote="{{route('backend.clients.create')}}" class="external" data-toggle="modal" data-target="#addPersonModal">
+                    <a href="#" data-remote="{{route('backend.clients.create')}}" class="external" data-toggle="modal"
+                        data-target="#addPersonModal">
                         <i class="fa fa-2x fa-plus-circle"></i>
                     </a>
                 </div>
@@ -29,42 +32,56 @@
     <div class="col-lg-4">
         <div class="form-group">
             <label for="mobile">الهاتف</label>
-            <input id="mobile" class="form-control" name="mobile" value="{{$order->mobile??''}}">
+            <input id="mobile" class="form-control" name="mobile" value="{{ old('mobile', $order->mobile ?? '') }}">
         </div>
     </div>
     <div class="col-lg-4">
         <div class="form-group">
             <label for="address">العنوان</label>
-            <input type="text" name="address" id="address" value="{{$order->address??''}}" class="form-control" required>
+            <input type="text" name="address" id="address" value="{{ old('address', $order->address ?? '') }}"
+                class="form-control" required>
         </div>
     </div>
 </div>
 <div class="row">
-<div class="col-lg-12">
-    <div class="form-group">
-        <label for="party_address">عنوان الحفل</label>
-        <input type="text" name="party_address" id="party_address" value="{{$order->party_address??''}}" class="form-control" required>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label for="party_address">عنوان الحفل</label>
+            <input type="text" name="party_address" id="party_address"
+                value="{{ old('party_address', $order->party_address ?? '') }}" class="form-control" required>
+        </div>
+
     </div>
-</div>
 </div>
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
             <label for="order_day">اليوم</label>
-            <input type="date" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')"  value="{{ $order->day??date("Y-m-d") }}" required>
+            <input type="date" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')"
+                value="{{ old('day', $order->day??date(" Y-m-d")) }}" required>
+                {{--  <input type="text" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')" value="{{ old('day', $order->day ? \Carbon\Carbon::createFromFormat('Y-m-d', $order->day)->format('d/m/Y') : date('d/m/Y')) }}" required onfocus="(this.type='date')" onblur="(this.type='text')" pattern="\d{2}/\d{2}/\d{4}">  --}}
+
+
+
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
             <label for="order_from">الوقت من</label>
-            <input type="time" name="start_time" value="{{$order->start_time??''}}" id="order_from" class="form-control" placeholder="@lang('tr.From')" required>
+            <input type="time" name="start_time" value="{{ old('start_time', $order->start_time ?? '') }}" id="order_from" class="form-control"
+                placeholder="@lang('tr.From')" required>
         </div>
+
+
+
     </div>
     <div style="display: none;" class="col-lg-4">
         <div class="form-group">
             <label for="order_to">الوفت إلى</label>
-            <input type="time" name="end_time" value="{{$order->end_time??''}}" id="order_to" class="form-control" placeholder="@lang('tr.To')">
+            <input type="time" name="end_time" value="{{ old('end_time', $order->end_time ?? '') }}" id="order_to" class="form-control"
+                placeholder="@lang('tr.To')">
         </div>
+
     </div>
 </div>
 <div class="row">
@@ -73,7 +90,7 @@
             <label for="status">الحالة</label>
             <select id="status" class="form-control" name="status">
                 @foreach($statuses as $k=>$v)
-                    <option {{$v==$order->status?"selected":""}} value="{{$v}}">{{trans("tr.$v")}}</option>
+                <option {{$v==$order->status?"selected":""}} value="{{$v}}">{{trans("tr.$v")}}</option>
                 @endforeach
             </select>
         </div>
@@ -89,16 +106,24 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="delegator_id">المندوب</label>
+
+
+
             <select name="delegator_id" id="delegator_id" class="form-control select2">
-                @if(auth('admin')->user()->roles[0]->id!=1)
-                    <option @if(auth('admin')->user()->id==$order->delegator_id) selected @endif value="{{ auth('admin')->user()->id }}">{{ auth('admin')->user()->name }}</option>
+                @if(count(auth('admin')->user()->roles) >= 3 && auth('admin')->user()->roles[0]->id != 1 && auth('admin')->user()->roles[2]->id != 1)
+
+                <option @if(auth('admin')->user()->id==$order->delegator_id) selected @endif value="{{
+                    auth('admin')->user()->id }}">{{ auth('admin')->user()->name }}</option>
                 @else
-                    <option value="">--- إختر المندوب ---</option>
-                    @foreach ($users as $user)
-                        <option @if($user->id==$order->delegator_id) selected @endif value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
+                <option value="">--- إختر المندوب ---</option>
+                @foreach ($users as $user)
+                <option @if($user->id==$order->delegator_id) selected @endif value="{{ $user->id }}">{{ $user->name }}
+                </option>
+                @endforeach
                 @endif
             </select>
+
+
         </div>
     </div>
     <div class="col-md-6">
@@ -107,7 +132,8 @@
             <select name="supervisor_id" id="supervisor_id" class="form-control select2">
                 <option value="">--- إختر المشرف ---</option>
                 @foreach ($users as $user)
-                    <option @if($user->id==$order->supervisor_id) selected @endif value="{{ $user->id }}">{{ $user->name }}</option>
+                <option @if($user->id==$order->supervisor_id) selected @endif value="{{ $user->id }}">{{ $user->name }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -128,24 +154,25 @@
             <li>
                 <a class="nav-link" data-toggle="pill" href="#buffet-list">البوفيهات</a>
             </li>
-            <li><input type="text" class="form-control p-2" style="margin-left: 10px;" id="searchInput" placeholder="كلمة البحث ..."></li>
+            <li><input type="text" class="form-control p-2" style="margin-left: 10px;" id="searchInput"
+                    placeholder="كلمة البحث ..."></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="items-list" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="row">
                     @php $i=0 ;$sel = array();$selected=false; @endphp
                     @if(isset($selectedProd))
-                        @foreach($selectedProd as $item)
-                            @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
-                            @include('backend.orders._item')
-                        @endforeach
+                    @foreach($selectedProd as $item)
+                    @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
+                    @include('backend.orders._item')
+                    @endforeach
                     @endif
                     @php $selected=false; @endphp
                     @if($products)
-                        @foreach($products->whereNotIn('id',$sel) as $item)
-                            @php $i++ ; @endphp
-                            @include('backend.orders._item')
-                        @endforeach
+                    @foreach($products->whereNotIn('id',$sel) as $item)
+                    @php $i++ ; @endphp
+                    @include('backend.orders._item')
+                    @endforeach
                     @endif
                 </div>
             </div>
@@ -153,37 +180,37 @@
                 <div class="row">
                     @php $sel = array();$selected=false; @endphp
                     @if(isset($selectedDocor))
-                        @foreach($selectedDocor as $item)
-                            @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
-                            @include('backend.orders._item')
-                        @endforeach
+                    @foreach($selectedDocor as $item)
+                    @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
+                    @include('backend.orders._item')
+                    @endforeach
                     @endif
                     @php $selected=false; @endphp
                     @if($decors)
-                        @foreach($decors->whereNotIn('id',$sel) as $item)
+                    @foreach($decors->whereNotIn('id',$sel) as $item)
 
-                                @php $i++ ; @endphp
-                                @include('backend.orders._item')
+                    @php $i++ ; @endphp
+                    @include('backend.orders._item')
 
-                        @endforeach
+                    @endforeach
                     @endif
                 </div>
             </div>
-            <div class="tab-pane fade"id="equipment-list">
+            <div class="tab-pane fade" id="equipment-list">
                 <div class="row">
                     @php $sel = array();$selected=false; @endphp
                     @if(isset($selectedEq))
-                        @foreach($selectedEq as $item)
-                            @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
-                            @include('backend.orders._item')
-                        @endforeach
+                    @foreach($selectedEq as $item)
+                    @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
+                    @include('backend.orders._item')
+                    @endforeach
                     @endif
                     @php $selected=false; @endphp
                     @if($equipments)
-                        @foreach($equipments->whereNotIn('id',$sel) as $item)
-                            @php $i++ ; @endphp
-                            @include('backend.orders._item')
-                        @endforeach
+                    @foreach($equipments->whereNotIn('id',$sel) as $item)
+                    @php $i++ ; @endphp
+                    @include('backend.orders._item')
+                    @endforeach
                     @endif
                 </div>
             </div>
@@ -191,17 +218,17 @@
                 <div class="row">
                     @php $sel = array();$selected=false; @endphp
                     @if(isset($selectedBuffet))
-                        @foreach($selectedBuffet as $item)
-                            @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
-                            @include('backend.orders._buffet')
-                        @endforeach
+                    @foreach($selectedBuffet as $item)
+                    @php $i++ ;$sel[]=$item->id;$selected=true; @endphp
+                    @include('backend.orders._buffet')
+                    @endforeach
                     @endif
                     @php $selected=false; @endphp
                     @if($buffets)
-                        @foreach($buffets->whereNotIn('id',$sel) as $item)
-                            @php $i++ ; @endphp
-                            @include('backend.orders._buffet')
-                        @endforeach
+                    @foreach($buffets->whereNotIn('id',$sel) as $item)
+                    @php $i++ ; @endphp
+                    @include('backend.orders._buffet')
+                    @endforeach
                     @endif
                 </div>
             </div>
@@ -227,26 +254,35 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label>قيمة العقد</label>
-            <input id="mainAmount" onchange="setMainAmount(this)" type="number" value="{{old('total')??$order->total}}" name="total" class="form-control orderTotal0" required>
+            <input id="mainAmount" onchange="setMainAmount(this)" type="number" value="{{ old('total', $order->total ?? '') }}"
+                name="total" class="form-control orderTotal0" required>
+
+
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label>العربون</label>
-            <input id="deposit" onchange="setDepositAmount(this)" type="number" value="{{old('paid')??$order->paid}}" name="paid" class="form-control paid0" required>
+            <input id="deposit" onchange="setDepositAmount(this)" type="number" value="{{ old('paid', $order->paid ?? '') }}"
+                name="paid" class="form-control paid0" required>
+
+
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="form-group">
             <label>رقم الايصال</label>
-            <input  type="number" value="{{old('rece_number')??$order->rece_number}}" name="rece_number" class="form-control">
+            <input type="number" value="{{ old('rece_number', $order->rece_number ?? '') }}" name="rece_number"
+                class="form-control">
         </div>
+
+
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label>تاريخ الإيصال</label>
-            <input type="date" value="{{old('rece_date')??$order->rece_date}}" name="rece_date" class="form-control">
+            <input type="date" value="{{ old('rece_date', $order->rece_date ?? '') }}" name="rece_date" class="form-control">
         </div>
     </div>
 
@@ -262,28 +298,40 @@
 
             <div class="col-md-12" id="payments">
                 @isset($order)
-                    @foreach($order->payments as $payment)
-                        <div class="row">
-                            <div class="col-md-1">
-                                <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>دفعة سداد</label><input type="number" onchange="calcPayments()" value="{{$payment->value}}" name="payments[{{$payment->id}}][value]" class="form-control paymentAmount" placeholder="دفعة سداد">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>رقم السند</label><input type="text" value="{{$payment->receipt_number}}" name="payments[{{$payment->id}}][receipt_number]" class="form-control" placeholder="رفم السند">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>تاريخ السند</label><input type="date" value="{{$payment->receipt_date}}" name="payments[{{$payment->id}}][receipt_date]" class="form-control" placeholder="تاريخ السند">
-                                </div>
-                            </div>
+                @foreach($order->payments as $payment)
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>دفعة سداد</label><input type="number" onchange="calcPayments()"
+                            value="{{ old('value', $payment->value ?? '') }}" name="payments[{{$payment->id}}][value]"
+                                class="form-control paymentAmount" placeholder="دفعة سداد">
+
+
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>رقم السند</label><input type="text" value="{{ old('receipt_number', $payment->receipt_number ?? '') }}"
+                                name="payments[{{$payment->id}}][receipt_number]" class="form-control"
+                                placeholder="رفم السند">
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>تاريخ السند</label><input type="date" value="{{ old('receipt_date', $payment->receipt_date ?? '') }}"
+                                name="payments[{{$payment->id}}][receipt_date]" class="form-control"
+                                placeholder="تاريخ السند">
+
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                 @endisset
             </div>
         </div>
@@ -297,23 +345,29 @@
 
             <div class="col-md-12" id="additions">
                 @isset($order)
-                    @foreach($order->additions as $addition)
-                        <div class="row">
-                            <div class="col-md-1">
-                                <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>مبلغ الاضافة</label><input type="number" value="{{$addition->value}}" onchange="calcAdditions()" name="addition_amounts[{{$addition->id}}][value]" class="form-control additionAmount" placeholder="مبلغ الاضافة">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>بيان الاضافة</label><textarea rows="1" name="addition_amounts[{{$addition->id}}][description]" class="form-control" placeholder="بيان الاضافة">{{$addition->description}}</textarea>
-                                </div>
-                            </div>
+                @foreach($order->additions as $addition)
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>مبلغ الاضافة</label><input type="number" value="{{ old('value', $addition->value ?? '') }}"
+                                onchange="calcAdditions()" name="addition_amounts[{{$addition->id}}][value]"
+                                class="form-control additionAmount" placeholder="مبلغ الاضافة">
+
+
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>بيان الاضافة</label><textarea rows="1"
+                                name="addition_amounts[{{$addition->id}}][description]" class="form-control"
+                                placeholder="بيان الاضافة">{{$addition->description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                 @endisset
             </div>
         </div>
@@ -327,32 +381,38 @@
 
             <div class="col-md-12" id="discounts">
                 @isset($order)
-                    @foreach($order->discounts as $discount)
-                        <div class="row">
-                            <div class="col-md-1">
-                                <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>مبلغ الخصم</label>
-                                    <input type="number" value="{{$discount->value}}" onchange="calcDiscounts()" name="discount_amounts[{{$discount->id}}][value]" class="form-control discountAmount" placeholder="مبلغ الخصم">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>بيان الخصم</label>
-                                    <textarea rows="1" name="discount_amounts[{{$discount->id}}][description]" class="form-control" placeholder="بيان الخصم">{{$discount->description}}</textarea>
-                                </div>
-                            </div>
+                @foreach($order->discounts as $discount)
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="fa fa-minus-circle text-danger" onclick="del(this)"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>مبلغ الخصم</label>
+                            <input type="number" value="{{ old('value', $discount->value ?? '') }}" onchange="calcDiscounts()"
+                                name="discount_amounts[{{$discount->id}}][value]" class="form-control discountAmount"
+                                placeholder="مبلغ الخصم">
+
+
+
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>بيان الخصم</label>
+                            <textarea rows="1" name="discount_amounts[{{$discount->id}}][description]"
+                                class="form-control" placeholder="بيان الخصم">{{$discount->description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                 @endisset
             </div>
         </div>
     </div>
     <div class="col-12">
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -376,36 +436,40 @@
 
 
 {{--<div class="row">--}}
-{{--    <div class="col-lg-4">--}}
-{{--        <div class="form-group">--}}
-{{--            <label>المبلغ المطلوب</label>--}}
-{{--            <input type="number" value="{{old('final_total')??$order->final_total}}" name="final_total" class="form-control final_total" required>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{-- <div class="col-lg-4">--}}
+        {{-- <div class="form-group">--}}
+            {{-- <label>المبلغ المطلوب</label>--}}
+            {{-- <input type="number" value="{{old('final_total')??$order->final_total}}" name="final_total"
+                class="form-control final_total" required>--}}
+            {{-- </div>--}}
+        {{-- </div>--}}
 
-{{--    <div class="col-lg-4">--}}
-{{--        <div class="form-group">--}}
-{{--            <label>قيمة الخصم</label>--}}
-{{--            <input type="number" value="{{old('discount')??($order->discount??0)}}" name="discount" class="form-control orderDiscount" required>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{-- <div class="col-lg-4">--}}
+        {{-- <div class="form-group">--}}
+            {{-- <label>قيمة الخصم</label>--}}
+            {{-- <input type="number" value="{{old('discount')??($order->discount??0)}}" name="discount"
+                class="form-control orderDiscount" required>--}}
+            {{-- </div>--}}
+        {{-- </div>--}}
 
-{{--    <div class="col-lg-4">--}}
-{{--        <div class="form-group">--}}
-{{--            <label>المتبقى</label>--}}
-{{--            <input readonly type="number" value="{{old('due')??$order->due}}" name="due" class="form-control due" required>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+    {{-- <div class="col-lg-4">--}}
+        {{-- <div class="form-group">--}}
+            {{-- <label>المتبقى</label>--}}
+            {{-- <input readonly type="number" value="{{old('due')??$order->due}}" name="due" class="form-control due"
+                required>--}}
+            {{-- </div>--}}
+        {{-- </div>--}}
+    {{--</div>--}}
 {{--<div class="row">--}}
-{{--    <div class="col-md-4">--}}
-{{--        <div class="form-group">--}}
-{{--            <label>اجمالى السداد</label>--}}
-{{--            <input readonly type="number" value="{{$order->total_paid??''}}" name="total_paid" class="form-control">--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{-- <div class="col-md-4">--}}
+        {{-- <div class="form-group">--}}
+            {{-- <label>اجمالى السداد</label>--}}
+            {{-- <input readonly type="number" value="{{$order->total_paid??''}}" name="total_paid"
+                class="form-control">--}}
+            {{-- </div>--}}
+        {{-- </div>--}}
 
-{{--</div>--}}
+    {{--</div>--}}
 
 
 
@@ -425,8 +489,8 @@
     <a href="" class="btn btn-primary"><i class="fa fa-money"></i> متابعة السداد</a>
 </div>
 @push('js')
-    <script>
-        $(document).on("change","#client_id",function(e){
+<script>
+    $(document).on("change","#client_id",function(e){
             if($(this).val() != ''){
                 var mobile = $(this).find('option:selected').attr('mobile');
                 var address = $(this).find('option:selected').attr('address');
@@ -500,14 +564,13 @@
 
         });
         // calculateOrderTotal();
-    </script>
+</script>
 
 
 
 
-    <script>
-
-        var mainAmount = "{{old('total')??$order->total}}";
+<script>
+    var mainAmount = "{{old('total')??$order->total}}";
         var deposit = "{{old('paid')??$order->paid}}";
         var payments = 0;
         var additions = 0;
@@ -655,5 +718,5 @@
             $('#remAmount').val(rem)
             console.log(rem)
         }
-    </script>
+</script>
 @endpush
