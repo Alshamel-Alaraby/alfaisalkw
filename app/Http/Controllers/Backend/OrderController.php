@@ -55,7 +55,7 @@ class OrderController extends BaseController
 
     public function store(OrderRequest $request)
     {
-        return $request;
+        
         try {
             DB::beginTransaction();
             $input = $request->except('_token');
