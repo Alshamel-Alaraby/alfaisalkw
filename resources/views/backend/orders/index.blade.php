@@ -127,8 +127,10 @@
                                         @endcan
                                     </td>
                                 </tr>
+
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
                 </div>

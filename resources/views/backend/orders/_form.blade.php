@@ -108,7 +108,6 @@
             <label for="delegator_id">المندوب</label>
 
 
-
             <select name="delegator_id" id="delegator_id" class="form-control select2">
                 @if(count(auth('admin')->user()->roles) >= 3 && auth('admin')->user()->roles[0]->id != 1 && auth('admin')->user()->roles[2]->id != 1)
 

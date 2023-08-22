@@ -15,7 +15,6 @@ use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
 
 class OrderController extends BaseController
 {
@@ -39,14 +38,27 @@ class OrderController extends BaseController
 
     public function index()
     {
-        $list = Order::filter()->get();
+        $loggedInUserId = auth()->id();
+        $roleIds = [1, 12];
 
-        // $from = request('fromdate');
-        //  return $from;
+        $userRoles = DB::table('model_has_roles')
+            ->where('model_type', 'App\\User')
+            ->where('model_id', $loggedInUserId)
+            ->whereIn('role_id', $roleIds)
+            ->count();
 
-        return view('backend.orders.index', compact('list'));
+        if ($userRoles > 0) {
+
+            $list = Order::filter()->get();
+            return view('backend.orders.index', compact('list'));
+
+        } else {
+
+            $list = Order::filter()->where('delegator_id', $loggedInUserId)->get();
+            return view('backend.orders.index', compact('list'));
+
+        }
     }
-
     public function create()
     {
         $order = new Order;
@@ -55,11 +67,11 @@ class OrderController extends BaseController
 
     public function store(OrderRequest $request)
     {
-        
+
         try {
             DB::beginTransaction();
             $input = $request->except('_token');
-            $input['contract_number'] = str_replace(['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'], ['0','1','2','3','4','5','6','7','8','9'], $input['contract_number']);
+            $input['contract_number'] = str_replace(['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'], ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], $input['contract_number']);
 
             foreach ($input['detail'] as $item) {
                 $itm = Item::query()->where('type', 'decor')->find($item['item_id']);
