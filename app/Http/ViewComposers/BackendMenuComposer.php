@@ -58,7 +58,7 @@ class BackendMenuComposer {
             [
                 "function" => "linkIfCan",
 
-                "parameters" => ['List Gallery', route('backend.reports.decors'), '<i class="kt-menu__link-bullet fa fa-file"></i>&nbsp;&nbsp;&nbsp;<span class="kt-menu__link-text"> تقرير الكوش المحجوزة'],
+                "parameters" => ['List Gallery', route('backend.reports.decors'), '<i class="kt-menu__link-bullet fa fa-file"></i>&nbsp;&nbsp;&nbsp;<span class="kt-menu__link-text"> تقرير الاصناف'],
             ],
             [
                 "function" => "linkIfCan",

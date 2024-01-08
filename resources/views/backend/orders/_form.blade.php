@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="contract_number">رقم العقد</label>
             <input id="contract_number" class="form-control" name="contract_number"
-                value="{{ old('contract_number', $order->contract_number ?? '') }}">
+                value="{{ old('contract_number', $order->contract_number) }}">
 
         </div>
     </div>
@@ -32,13 +32,13 @@
     <div class="col-lg-4">
         <div class="form-group">
             <label for="mobile">الهاتف</label>
-            <input id="mobile" class="form-control" name="mobile" value="{{ old('mobile', $order->mobile ?? '') }}">
+            <input id="mobile" class="form-control" name="mobile" value="{{ old('mobile', $order->mobile ) }}">
         </div>
     </div>
     <div class="col-lg-4">
         <div class="form-group">
             <label for="address">العنوان</label>
-            <input type="text" name="address" id="address" value="{{ old('address', $order->address ?? '') }}"
+            <input type="text" name="address" id="address" value="{{ old('address', $order->address ) }}"
                 class="form-control" required>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="party_address">عنوان الحفل</label>
             <input type="text" name="party_address" id="party_address"
-                value="{{ old('party_address', $order->party_address ?? '') }}" class="form-control" required>
+                value="{{ old('party_address', $order->party_address ) }}" class="form-control" required>
         </div>
 
     </div>
@@ -68,7 +68,7 @@
     <div class="col-lg-6">
         <div class="form-group">
             <label for="order_from">الوقت من</label>
-            <input type="time" name="start_time" value="{{ old('start_time', $order->start_time ?? '') }}" id="order_from" class="form-control"
+            <input type="time" name="start_time" value="{{ old('start_time', $order->start_time ) }}" id="order_from" class="form-control"
                 placeholder="@lang('tr.From')" required>
         </div>
 
@@ -78,7 +78,7 @@
     <div style="display: none;" class="col-lg-4">
         <div class="form-group">
             <label for="order_to">الوفت إلى</label>
-            <input type="time" name="end_time" value="{{ old('end_time', $order->end_time ?? '') }}" id="order_to" class="form-control"
+            <input type="time" name="end_time" value="{{ old('end_time', $order->end_time ) }}" id="order_to" class="form-control"
                 placeholder="@lang('tr.To')">
         </div>
 
@@ -253,7 +253,7 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label>قيمة العقد</label>
-            <input id="mainAmount" onchange="setMainAmount(this)" type="number" value="{{ old('total', $order->total ?? '') }}"
+            <input id="mainAmount" onchange="setMainAmount(this)" type="number" value="{{ old('total', $order->total ) }}"
                 name="total" class="form-control orderTotal0" required>
 
 
@@ -262,7 +262,7 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label>العربون</label>
-            <input id="deposit" onchange="setDepositAmount(this)" type="number" value="{{ old('paid', $order->paid ?? '') }}"
+            <input id="deposit" onchange="setDepositAmount(this)" type="number" value="{{ old('paid', $order->paid ) }}"
                 name="paid" class="form-control paid0" required>
 
 
@@ -272,7 +272,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>رقم الايصال</label>
-            <input type="number" value="{{ old('rece_number', $order->rece_number ?? '') }}" name="rece_number"
+            <input type="number" value="{{ old('rece_number', $order->rece_number ) }}" name="rece_number"
                 class="form-control">
         </div>
 
@@ -281,7 +281,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>تاريخ الإيصال</label>
-            <input type="date" value="{{ old('rece_date', $order->rece_date ?? '') }}" name="rece_date" class="form-control">
+            <input type="date" value="{{ old('rece_date', $order->rece_date ) }}" name="rece_date" class="form-control">
         </div>
     </div>
 
@@ -305,7 +305,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>دفعة سداد</label><input type="number" onchange="calcPayments()"
-                            value="{{ old('value', $payment->value ?? '') }}" name="payments[{{$payment->id}}][value]"
+                            value="{{ old('value', $payment->value ) }}" name="payments[{{$payment->id}}][value]"
                                 class="form-control paymentAmount" placeholder="دفعة سداد">
 
 
@@ -313,7 +313,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>رقم السند</label><input type="text" value="{{ old('receipt_number', $payment->receipt_number ?? '') }}"
+                            <label>رقم السند</label><input type="text" value="{{ old('receipt_number', $payment->receipt_number ) }}"
                                 name="payments[{{$payment->id}}][receipt_number]" class="form-control"
                                 placeholder="رفم السند">
 
@@ -322,7 +322,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>تاريخ السند</label><input type="date" value="{{ old('receipt_date', $payment->receipt_date ?? '') }}"
+                            <label>تاريخ السند</label><input type="date" value="{{ old('receipt_date', $payment->receipt_date ) }}"
                                 name="payments[{{$payment->id}}][receipt_date]" class="form-control"
                                 placeholder="تاريخ السند">
 
@@ -351,7 +351,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>مبلغ الاضافة</label><input type="number" value="{{ old('value', $addition->value ?? '') }}"
+                            <label>مبلغ الاضافة</label><input type="number" value="{{ old('value', $addition->value ) }}"
                                 onchange="calcAdditions()" name="addition_amounts[{{$addition->id}}][value]"
                                 class="form-control additionAmount" placeholder="مبلغ الاضافة">
 
@@ -388,7 +388,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>مبلغ الخصم</label>
-                            <input type="number" value="{{ old('value', $discount->value ?? '') }}" onchange="calcDiscounts()"
+                            <input type="number" value="{{ old('value', $discount->value ) }}" onchange="calcDiscounts()"
                                 name="discount_amounts[{{$discount->id}}][value]" class="form-control discountAmount"
                                 placeholder="مبلغ الخصم">
 

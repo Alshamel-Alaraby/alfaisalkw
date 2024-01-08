@@ -45,4 +45,5 @@ class Item extends Model implements HasMedia
         return $qty;
     }
 
+
 }

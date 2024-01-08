@@ -58,8 +58,30 @@
 <script src="{{asset('backend')}}/calendar/main4.js"></script>
 <script src="{{asset('backend')}}/calendar/main5.js"></script>--}}
 <!-- Select2 -->
-<script src="{{asset('backend')}}/select2/js/select2.full.min.js"></script>
+{{--  <script src="{{asset('backend')}}/select2/js/select2.full.min.js"></script>  --}}
+
+
+
+{{--  <script src="{{asset('')backend/js/printThis.js')"></script>  --}}
+
+ {{--  <script src="{{ asset('backend/js/printThis.js') }}"></script>  --}}
+
+<!-- Include printThis.js library -->
+ {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"></script>
+  --}}
+
 <script>
+
+
+    {{--  function printTable() {
+        $('#clientSideDataTable_wrapper').printThis({
+            importCSS: true, // Import CSS for better styling in print
+            header: '<h1>Table Printing</h1>', // Optional header for the print
+            loadCSS: 'path-to-your-print-css-file.css' // Optional path to additional CSS file
+            // Add other options as needed according to printThis.js documentation
+        });
+    }  --}}
     function mydate()
     {
       //alert("");
@@ -78,7 +100,7 @@
     document.getElementById("dt").hidden=true;
     }
 
-    
+
     @if (session()->has('alert-success'))
         toastr.success("{{session('alert-success')}}");
     @elseif (session()->has('alert-danger'))
@@ -150,6 +172,10 @@
         $("ul.kt-menu__nav  li.kt-menu__item--active").removeClass('kt-menu__item--active');
         $('a[href="'+current+'"]').closest('li').addClass('kt-menu__item--active');
     });
+
+
+
+
 
 
 </script>

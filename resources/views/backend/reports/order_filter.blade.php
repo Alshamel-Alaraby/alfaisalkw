@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-3" style="margin-top: 25px;">
+            <div class="form-group col-md-3 no-print" style="margin-top: 25px;">
                 <button type="submit" class="btn btn-success">
                     <i class="fa fa-search"></i>&nbsp;بحث
                 </button>

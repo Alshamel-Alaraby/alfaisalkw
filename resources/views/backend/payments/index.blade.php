@@ -46,6 +46,7 @@
                                 <th class="tdesign">المبلغ</th>
                                 <th class="tdesign">رقم الايصال</th>
                                 <th class="tdesign">تاريخ الإيصال</th>
+                                <th class="tdesign">رقم العقد</th>
                                 <th class="tdesign">ملحوظة</th>
                                 <th class="tdesign">العملية</th>
                             </tr>
@@ -63,6 +64,8 @@
                                     <td class="tdesign">{{ $payment->value }}</td>
                                     <td class="tdesign">{{ $payment->receipt_number }}</td>
                                     <td class="tdesign">{{ $payment->receipt_date }}</td>
+                                    <td class="tdesign">{{ str_replace(['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'],
+                                        ['0','1','2','3','4','5','6','7','8','9'], $order->contract_number) }}</td>
                                     <td class="tdesign">{{ $payment->note }}</td>
                                     <td class="tdesign">
                                         @can('Edit Payments')

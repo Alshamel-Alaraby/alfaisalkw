@@ -19,6 +19,7 @@ class PaymentController extends BaseController
     public function create()
     {
         $payment = new Payment;
+
         return view('backend.payments.create',compact('payment'));
     }
 

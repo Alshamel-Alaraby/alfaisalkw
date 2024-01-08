@@ -55,7 +55,7 @@
                             class="table table-bordered dt-responsive">
                             <thead>
                                 <tr>
-                                    <th class="tdesign">#</th>
+                                    {{--  <!--<th class="tdesign">#</th>  --}}
                                     <th class="tdesign">رقم العقد</th>
                                     <th class="tdesign">العميل</th>
                                     <th class="tdesign">الهاتف</th>
@@ -80,18 +80,20 @@
                                 @foreach ($list as $order)
                                 {{-- @if(!$role->hasRole('Admin')) --}}
                                 <tr>
-                                    <td class="tdesign">{{ $loop->iteration }}</td>
-                                    {{--  <td class="tdesign">{{ $order->contract_number }}</td>  --}}
+                                    {{--  <td class="tdesign">{{ $loop->iteration }}</td>  --}}
+
                                     <td class="tdesign">{{ str_replace(['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'], ['0','1','2','3','4','5','6','7','8','9'], $order->contract_number) }}</td>
 
-                                    <td class="tdesign">{{ optional($order->client)->name }}</td>
-                                    <td class="tdesign">{{ $order->mobile }}</td>
+                                    <td class="tdesign">{{ $order->client->name }}</td>
+                                    <td class="tdesign" style="max-width: 70px">{{ $order->mobile }}</td>
 
                                     <td class="tdesign">{{ optional($order->delegator)->name }}</td>
                                     <td class="tdesign">{{ $order->day }}</td>
-                                    <td class="tdesign">{{ @$order->decor_title() }}</td>
-                                    <td class="tdesign">{{ $order->party_address }}</td>
-                                    <td class="tdesign">{{ trans("tr.".$order->status) }}</td>
+                                    <td class="tdesign" style="max-width: 100px">{{ @$order->decor_title() }}</td>
+
+
+                                     <td class="tdesign">{{ $order->party_address }}</td>
+                                    <td class="tdesign" style="max-width: 100px">{{ trans("tr.".$order->status) }}</td>
 
                                     {{-- <td class="tdesign">{{ $order->address }}</td>--}}
 
@@ -101,10 +103,12 @@
                                     <td class="tdesign">{{ $order->additions()->sum('value') }}</td>
                                     <td class="tdesign">{{ $order->remaining }}</td>
                                     <td class="tdesign">
+                                        @if(auth()->user()->department->id == 5 &&  optional($order->status)->name == 'Pending')
                                         @can('Edit Orders')
                                         <a href="{{ route('backend.orders.edit',$order->id) }}" class="bluebutton"><i
                                                 class="fa fa-edit"></i></a>&nbsp;
                                         @endcan
+                                        @endif
                                         @can('Assign Task Orders')
                                         <a href="{{ route('backend.orders.assignTask',$order->id) }}"
                                             class="purplebutton"><i class="fa fa-user-plus"></i></a>&nbsp;
@@ -126,12 +130,16 @@
                                             class="redbutton deleteRecord"><i class="fa fa-trash"></i></a>
                                         @endcan
                                     </td>
+
                                 </tr>
 
                                 @endforeach
                             </tbody>
 
                         </table>
+                        <div class="justify-content-center">
+                            {!! $list->links("pagination::bootstrap-4") !!}
+                        </div>
                     </div>
                 </div>
             </div>

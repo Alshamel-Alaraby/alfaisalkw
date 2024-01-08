@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
-@section('title','تقرير الكوش المحجوزة')
+@section('title','تقرير الاصناف')
 @section('headerTitle')
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    تقرير الديكورات المحجوزة
+                    تقرير  الاصناف
                 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
@@ -25,7 +25,7 @@
                     <div class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                تقرير الكوش المحجوزة
+                                تقرير  الاصناف
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">
@@ -45,7 +45,7 @@
                                     <th class="tdesign">رقم الطلب</th>
                                     <th class="tdesign">تاريخ الإضافه</th>
                                     <th class="tdesign">الكوشة</th>
-                                    <th class="tdesign">العميل</th>
+                                    {{--  <th class="tdesign">العميل</th>  --}}
                                     <th class="tdesign">اليوم</th>
                                     <th class="tdesign">الفترة من</th>
 
@@ -64,12 +64,12 @@
                                         <td class="tdesign"><a class="bluebutton" href="{{ route("backend.orders.show",$order->id) }}">رقم الطلب# {{ $order->id }}</a></td>
                                         <td class="tdesign">{{ $order->created_at->format('Y-m-d') }}</td>
                                         <td class="tdesign">{{ optional($detail->item)->name }}</td>
-                                        <td class="tdesign">
+                                        {{--  <td class="tdesign">
                                             @can('Show Clients')
                                                 <a href="{{ route('backend.clients.show',$order->client_id) }}" class="pinkbutton"><i class="fa fa-eye"></i> {{ optional($order->client)->name }}</a>
                                             @endcan
 
-                                        </td>
+                                        </td>  --}}
                                         <td class="tdesign">{{ $order->day }}</td>
                                         <td class="tdesign">{{date("h:i A", strtotime($order->start_time))}}</td>
                                         <td class="tdesign">{{ trans("tr.".$order->status) }}</td>

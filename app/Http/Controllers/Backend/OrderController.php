@@ -49,12 +49,12 @@ class OrderController extends BaseController
 
         if ($userRoles > 0) {
 
-            $list = Order::filter()->get();
+            $list = Order::filter()->paginate(50);//->get();
             return view('backend.orders.index', compact('list'));
 
         } else {
 
-            $list = Order::filter()->where('delegator_id', $loggedInUserId)->get();
+            $list = Order::filter()->where('delegator_id', $loggedInUserId)->paginate(50);//->get();
             return view('backend.orders.index', compact('list'));
 
         }
@@ -113,7 +113,7 @@ class OrderController extends BaseController
         } catch (\Exception $e) {
             DB::rollBack();
             $error = json_decode($e->getMessage()) ?: $e->getMessage();
-            return back()->withErrors($error);
+            return redirect()->back()->withInput()->withErrors($error);
         }
         return redirect()->route('backend.orders.index')->with('alert-success', 'تمت الإضافة بنجاح');
     }
@@ -187,7 +187,7 @@ class OrderController extends BaseController
         } catch (\Exception $e) {
             DB::rollBack();
             $error = json_decode($e->getMessage()) ?: $e->getMessage();
-            return back()->withErrors($error);
+            return redirect()->back()->withInput()->withErrors($error);
         }
         return redirect()->route('backend.orders.index')->with('alert-success', 'تم التعديل بنجاح');
     }

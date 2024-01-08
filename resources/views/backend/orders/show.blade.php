@@ -53,6 +53,7 @@
                                             <b>رقم العقد #{{$order->contract_number}}</b><br>
                                             <b>العميل:</b> {{optional($order->client)->name}}<br>
                                             <b>الهاتف:</b> {{$order->mobile}}<br>
+                                            <b>اسم المندوب:</b> {{$order->delegator->name}}<br>
                                         </div>
                                         <div class="col-sm-4 invoice-col">
                                             <b>العنوان:</b> {{$order->address}}<br/>
