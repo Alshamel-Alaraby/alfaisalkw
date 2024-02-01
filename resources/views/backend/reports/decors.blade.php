@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
-@section('title','تقرير الاصناف')
+@section('title','تقرير الكوش المحجوزه')
 @section('headerTitle')
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-container  kt-container--fluid ">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
-                    تقرير  الاصناف
+                    تقرير  الكوش المحجوزه
                 </h3>
                 <span class="kt-subheader__separator kt-hidden"></span>
                 <div class="kt-subheader__breadcrumbs">
@@ -25,7 +25,7 @@
                     <div class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                تقرير  الاصناف
+                                تقرير  الكوش المحجوزه
                             </h3>
                         </div>
                         <div class="kt-portlet__head-toolbar">

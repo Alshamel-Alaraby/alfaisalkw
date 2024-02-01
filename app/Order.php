@@ -4,16 +4,43 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\ModelStatus\HasStatuses;
+use Spatie\Activitylog\Traits\LogsActivity;
+
+
 
 class Order extends Model
 {
+
     use HasStatuses;
+    use LogsActivity;
+
     protected $fillable = ['client_id','day','start_time','end_time','note',
         'mobile','address','payment_method','total','final_total','discount','paid','due'
         ,'delegator_id','supervisor_id','contract_number',
         'rece_number','rece_date','party_address'];
 
+    protected static $logAttributes = ['client_id','day','start_time','end_time','note',
+    'mobile','address','payment_method','total','final_total','discount','paid','due'
+    ,'delegator_id','supervisor_id','contract_number',
+    'rece_number','rece_date','party_address'];
+
+
+    protected static $logName = 'Order';
+
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        $user = @auth()->user()->name ?: "system";
+
+        return "This Order has been {$eventName} by ($user)";
+    }
+
+    public function activityLogs()
+    {
+        return $this->morphMany(Activity::class, 'subject');
+    }
 
     public function client(){
         return $this->belongsTo(Client::class);
@@ -27,10 +54,19 @@ class Order extends Model
         return $this->belongsTo(User::class,'delegator_id','id');
     }
 
+
+
     public function details(){
         return $this->belongsToMany(Item::class,'order_detailes','order_id','item_id')
             ->withPivot('price','is_sub','qty','recived_qty','item_id','buffet_id');
     }
+
+    public function orderDetails()
+    {
+        return $this->belongsToMany(Item::class, 'order_detailes', 'order_id', 'item_id')
+            ->withPivot('price', 'is_sub', 'qty', 'recived_qty', 'item_id', 'buffet_id');
+    }
+
 
     public function tasks(){
         return $this->belongsToMany(Task::class,'order_task','order_id','task_id')
@@ -110,4 +146,6 @@ class Order extends Model
         }
         return trim($title,'&');
     }
+
+
 }

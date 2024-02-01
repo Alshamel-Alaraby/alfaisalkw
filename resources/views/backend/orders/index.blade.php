@@ -1,8 +1,8 @@
 @extends('backend.layouts.app')
-@section('title','الطلبات')
+@section('title','العقود والطلبات')
 @section('headerTitle')
 <div class="kt-subheader   kt-grid__item" id="kt_subheader">
-    <div class="kt-container  kt-container--fluid ">
+    <div class="kt-container  kt-container--fluid no-print">
         <div class="kt-subheader__main">
             <h3 class="kt-subheader__title">
                 الرئيسية
@@ -30,7 +30,7 @@
                             العقود {{ request('status')?trans("tr.".request('status')):'' }}
                         </h3>
                     </div>
-                    <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-toolbar no-print">
                         @can('Create Orders')
                         <a href="{{ route('backend.orders.create') }}" class="btn btn-primary">إضافة عقد جديد</a>
                         @endcan
@@ -51,11 +51,11 @@
                 <div class="kt-portlet__body kt-portlet__body--fit">
 
                     <div class="col-xl-12 order-lg-2 order-xl-1">
-                        <table id="clientSideDataTable" class="display" style="width:100%;"
-                            class="table table-bordered dt-responsive">
+                        <table id="clientSideDataTable" style="width:100%;" class="table table-bordered dt-responsive">
                             <thead>
                                 <tr>
-                                    {{--  <!--<th class="tdesign">#</th>  --}}
+                                    {{--
+                                    <!--<th class="tdesign">#</th>  --}}
                                     <th class="tdesign">رقم العقد</th>
                                     <th class="tdesign">العميل</th>
                                     <th class="tdesign">الهاتف</th>
@@ -73,7 +73,7 @@
                                     <th class="tdesign">اجمالي الخصم</th>
                                     <th class="tdesign">اجمالي الاضافة</th>
                                     <th class="tdesign">المتنبقي</th>
-                                    <th class="tdesign">العملية</th>
+                                    <th class="tdesign no-print">العملية</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,32 +82,40 @@
                                 <tr>
                                     {{--  <td class="tdesign">{{ $loop->iteration }}</td>  --}}
 
-                                    <td class="tdesign">{{ str_replace(['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'], ['0','1','2','3','4','5','6','7','8','9'], $order->contract_number) }}</td>
+                                    <td class="tdesign"  style="max-width: 20px">{{ str_replace(['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'], ['0','1','2','3','4','5','6','7','8','9'], $order->contract_number) }}</td>
 
-                                    <td class="tdesign">{{ $order->client->name }}</td>
+                                    <td class="tdesign" style="max-width: 70px">{{ $order->client->name }}</td>
                                     <td class="tdesign" style="max-width: 70px">{{ $order->mobile }}</td>
 
-                                    <td class="tdesign">{{ optional($order->delegator)->name }}</td>
+                                    <td class="tdesign" style="max-width: 70px">{{ optional($order->delegator)->name }}</td>
                                     <td class="tdesign">{{ $order->day }}</td>
-                                    <td class="tdesign" style="max-width: 100px">{{ @$order->decor_title() }}</td>
+                                    <td class="tdesign" style="max-width: 90px">{{ @$order->decor_title() }}</td>
 
 
-                                     <td class="tdesign">{{ $order->party_address }}</td>
-                                    <td class="tdesign" style="max-width: 100px">{{ trans("tr.".$order->status) }}</td>
+                                     <td class="tdesign" style="max-width: 10px">{{ $order->party_address }}</td>
+                                    <td class="tdesign" style="max-width: 70px">{{ trans("tr.".$order->status) }}</td>
 
                                     {{-- <td class="tdesign">{{ $order->address }}</td>--}}
 
-                                    <td class="tdesign">{{ $order->final_total }}</td>
-                                    <td class="tdesign">{{ $order->total_paid }}</td>
-                                    <td class="tdesign">{{ $order->discounts()->sum('value') }}</td>
-                                    <td class="tdesign">{{ $order->additions()->sum('value') }}</td>
-                                    <td class="tdesign">{{ $order->remaining }}</td>
+                                    <td class="tdesign" style="width: 10px !important">{{ $order->final_total }}</td>
+                                    <td class="tdesign" style="width: 10px !important">{{ $order->total_paid }}</td>
+                                    <td class="tdesign" style="width: 10px !important">{{ $order->discounts()->sum('value') }}</td>
+                                    <td class="tdesign" style="width: 10px !important">{{ $order->additions()->sum('value') }}</td>
+                                    <td class="tdesign" style="width: 10px !important">{{ $order->remaining }}</td>
                                     <td class="tdesign">
-                                        @if(auth()->user()->department->id == 5 &&  optional($order->status)->name == 'Pending')
+                                        {{--  @if(auth()->user()->department->id == 5 &&  optional($order->status)->name == 'Pending')
                                         @can('Edit Orders')
                                         <a href="{{ route('backend.orders.edit',$order->id) }}" class="bluebutton"><i
                                                 class="fa fa-edit"></i></a>&nbsp;
                                         @endcan
+                                        @endif  --}}
+
+                                        @if(in_array(auth()->user()->department->id, [1, 2, 3, 4, 5, 6, 7, 8]))
+                                            @if(auth()->user()->department->id == 5 && optional($order->status)->name == 'Pending')
+                                                <a href="{{ route('backend.orders.edit', $order->id) }}" class="bluebutton"><i class="fa fa-edit"></i></a>&nbsp;
+                                            @elseif(auth()->user()->department->id != 5)
+                                                <a href="{{ route('backend.orders.edit', $order->id) }}" class="bluebutton"><i class="fa fa-edit"></i></a>&nbsp;
+                                            @endif
                                         @endif
                                         @can('Assign Task Orders')
                                         <a href="{{ route('backend.orders.assignTask',$order->id) }}"
@@ -129,12 +137,27 @@
                                             data-action="{{route('backend.orders.destroy',$order->id)}}"
                                             class="redbutton deleteRecord"><i class="fa fa-trash"></i></a>
                                         @endcan
+
+                                        <a title="activityLog" href="{{ route('backend.orders.activityLog', $order->id) }}"
+                                        {{--  data-action="{{ route('backend.orders.activityLog', $order->id) }}"  --}}
+                                        class="redbutton"><i class="fa fa-eye"></i></a>
                                     </td>
 
                                 </tr>
 
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8">الاجمالي:</td>
+                                    <td id="finalTotal">0</td>
+                                    <td id="totalPaid">0</td>
+                                    <td id="discountsTotal">0</td>
+                                    <td id="additionsTotal">0</td>
+                                    <td id="remainingTotal">0</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
 
                         </table>
                         <div class="justify-content-center">

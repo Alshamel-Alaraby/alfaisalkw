@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
         "mcamara/laravel-localization": "^1.6",
+        "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-medialibrary": "^7.19",
         "spatie/laravel-menu": "^3.5",
         "spatie/laravel-model-status": "^1.10",

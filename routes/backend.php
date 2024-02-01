@@ -14,6 +14,8 @@ Route::group(['middleware' => ['auth:admin'],'as' => 'backend.'], function (Rout
     Route::get('reports/sales', 'ReportController@getSales')->name('reports.sales');
     Route::get('reports/minus', 'ReportController@getMinus')->name('reports.minus');
     Route::get('reports/decors', 'ReportController@getDecorsReport')->name('reports.decors');
+    Route::get('orders/activity-log/{order}', 'OrderController@activityLog')->name('orders.activityLog');
+
     Route::group(['middleware' => 'authorize'], function (Router $router) {
         $router->resource('users', 'UserController')->except('show');
         $router->resource('roles', 'RoleController')->except('show');
@@ -32,6 +34,11 @@ Route::group(['middleware' => ['auth:admin'],'as' => 'backend.'], function (Rout
         $router->resource('sliders', 'SliderController')->except('show');
         $router->any('orders/changeStatus/{order}','OrderController@changeStatus')->name('orders.changeStatus');
         $router->any('orders/assignTask/{order}','OrderController@assignTask')->name('orders.assignTask');
+        $router->get('payments/orders/{order}','PaymentController@show')->name('payments.show');
+
+
+
+
     });
     $router->resource('ordertasks', 'OrderTaskController')->except('show','create','store');
 });

@@ -148,7 +148,7 @@
 }
 
 .redbutton{
- 
+
   background: #e02929 !important;
   padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
 
@@ -163,7 +163,7 @@
 }
 
 .bluebutton{
-  
+
   background: #2b65c5 !important;
   padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
 
@@ -178,7 +178,7 @@
 }
 
 .greenbutton{
-  
+
   background: #128a42ab !important;
   padding: 5px 10px 5px 10px; border-radius: 20px; color: white !important;
 
@@ -193,7 +193,7 @@
 }
 
 .purplebutton{
-  
+
   background: #450f9c9c !important;
   padding: 5px 10px 5px 10px; border-radius: 20px; color: white;
 
@@ -220,8 +220,9 @@
 
 .tdesign{
 
-  padding:15px !important;
+  padding:14px !important;
   border:1px solid #eee !important;
+  font-size: 97% !important;
 }
 .ttdesign{
 

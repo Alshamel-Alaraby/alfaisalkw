@@ -175,8 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
-        Darryldecode\Cart\CartServiceProvider::class
-
+        Darryldecode\Cart\CartServiceProvider::class,
+        
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

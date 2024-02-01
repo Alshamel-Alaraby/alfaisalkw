@@ -34,7 +34,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-globe"></i> الفيصل لتنظيم قاعات الأفراح
+                                                <i class="fas fa-globe"></i> الفيصل تأجير معدات الافراح
                                                 <small class="float-right">التاريخ: {{ $order->created_at->format('Y-m-d') }}</small>
                                             </h4>
                                         </div>
@@ -44,8 +44,9 @@
                                     <div class="row invoice-info">
                                         <div class="col-sm-4 invoice-col">
                                             <address>
-                                                <strong>العنوان: 10 شارع خالد بن الوليد</strong><br>
-                                                الهاتف: (804) 123-5432<br>
+                                                <strong>العنوان: الجهراء ق 2 مجمع الزيد التجاري
+                                                    </strong><br>
+                                                الهاتف: (804) 99414639 - 1822218<br>
                                                 الإيميل: info@alfaisal.com
                                             </address>
                                         </div>

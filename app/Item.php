@@ -31,6 +31,24 @@ class Item extends Model implements HasMedia
             ->whereRaw("DATE(day) >= '{$date}'")
             ->currentStatus([Status::PENDING, Status::REVIEWED, Status::INPROGRESS]);
     }
+    public function getBalanceAttribute()
+    {
+        return $this->qty;
+    }
+
+    // public function getReservedAttribute()
+    // {
+    //     $this->load('detailes');
+
+    //     return $this->detailes->pluck('qty')->sum();
+    //     // return $this->detailes->sum('qty');
+    // }
+
+    public function getRemainingAttribute()
+    {
+        return $this->qty - $this->reserved;
+    }
+
 
     public function availableQty($date)
     {

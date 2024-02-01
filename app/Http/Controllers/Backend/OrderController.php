@@ -59,6 +59,7 @@ class OrderController extends BaseController
 
         }
     }
+
     public function create()
     {
         $order = new Order;
@@ -276,5 +277,12 @@ class OrderController extends BaseController
         $users = User::get();
         $tasks = Task::get();
         return view('backend.orders.assign_task', compact('order', 'departments', 'tasks', 'users', 'orderTasks'));
+    }
+
+    public function activityLog(Order $order)
+    {
+        $activityLogs = $order->activityLogs;
+
+        return view('backend.orders.activity_log', compact('order', 'activityLogs'));
     }
 }

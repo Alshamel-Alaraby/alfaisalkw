@@ -79,12 +79,15 @@ class HomeController extends BaseController
                     'start'=> $start,
                     'end'=> $end,
                     'url'=>route('backend.orders.show',$order->id),
-                    'backgroundColor'=> "#008000",
-                    'borderColor'=> "#008000",
+                    'backgroundColor'=> $this->getColor($order->status),
+                    'borderColor'=> $this->getColor($order->status),
                 ];
         }
         return ['calander'=>$calander];
     }
+
+
+
 
     public function getDecorList(){
         $decors = Item::where('type','decor')->with('detailes')->get();
@@ -103,8 +106,8 @@ class HomeController extends BaseController
                         'start'=> $start,
                         'end'=> $end,
                         'url'=>route('backend.orders.show',$order->id),
-                        'backgroundColor'=> "#008000",
-                        'borderColor'=> "#008000",
+                        'backgroundColor'=> $this->getColor($order->status),
+                        'borderColor'=> $this->getColor($order->status),
                     ];
             }
         }
@@ -158,7 +161,7 @@ class HomeController extends BaseController
             $tasks = $list->latest()->get();
             foreach ($tasks as $t) {
                 if ($t->status == "بدأ") {
-                    $bgColor = "#008000";
+                    $bgColor = $this->getColor($order->status);
                 } elseif ($t->status == "قيد الانتظار") {
                     $bgColor = "#FF9800";
                 } else {
@@ -175,6 +178,23 @@ class HomeController extends BaseController
             }
         }
         return ['calander'=>$calander,'status'=>$status];
+    }
+
+
+    protected function getColor($status)
+    {
+        switch ($status) {
+            case Status::PENDING:
+                return '#f39c12';
+            case Status::INPROGRESS:
+                return '#00c0ef';
+            case Status::FINISHED:
+                return '#00a65a';
+            case Status::CANCELLED:
+                return '#dd4b39';
+            default:
+                return '#00a65a';
+        }
     }
 
 }

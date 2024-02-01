@@ -39,7 +39,8 @@
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+ }
 
 html {
   font-family: sans-serif;
@@ -15058,7 +15059,7 @@ canvas {
   -ms-user-select: none; }
 
 /* Customize website's scrollbar like Mac OS */
-/* 
+/*
 ::-webkit-scrollbar {
     background-color:#f6f6f6;
     width:14px;
@@ -37290,7 +37291,7 @@ body {
       padding-right: 0;
       margin-right: 0; } }
 
-      
+
 .ps__rail-x
 {
     left: 0px; bottom: -250px !important;
