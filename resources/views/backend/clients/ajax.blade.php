@@ -35,11 +35,21 @@
                     data: form.serialize(),
                     success: function(data)
                     {
+                        console.log(data);
                         $("#client_id").empty();
                         $("#client_id").append(data);
                         $("#client_id option:last").attr("selected", "selected");
                         $('.close').trigger('click');
                         $( "#client_id" ).trigger('change');
+                    },
+                    error: function(xhr, status, error) {
+                        var errors = xhr.responseJSON.errors;
+                        console.log(errors);
+                        $.each(errors, function(key, value) {
+                            $('#' + key + '_error').html(value);
+                            console.log(key);
+                            console.log(value);
+                        });
                     }
                 });
             });

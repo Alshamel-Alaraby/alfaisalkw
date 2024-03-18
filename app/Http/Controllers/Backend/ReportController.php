@@ -49,10 +49,7 @@ class ReportController extends BaseController
     public function getDecorsReport(Request $request)
     {
 
-
-
         $fromDate = $request->input('fromdate');
-
 
         $items = Item::with(['detailes' => function ($query) use ($fromDate) {
             $query->whereHas('orderDetails', function ($subquery) use ($fromDate) {
@@ -72,7 +69,7 @@ class ReportController extends BaseController
                     ->sum('qty');
             } else {
 
-                $item->reserved = OrderDetail::where('item_id', $item->id)->sum('qty');
+                $item->reserved = 0;
             }
             $item->remaining = $item->qty - $item->reserved;
         });

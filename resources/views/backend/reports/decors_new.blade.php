@@ -72,6 +72,7 @@
                                     <th class="tdesign">الرصيد</th>
                                     <th class="tdesign">المحجوز منه</th>
                                     <th class="tdesign">المتاح</th>
+                                    <th class="tdesign">الصورة</th>
 
                                 </tr>
                             </thead>
@@ -85,6 +86,12 @@
                                     <td class="tdesign">{{ $item->balance}}</td>
                                     <td class="tdesign">{{ $item->reserved }}</td>
                                     <td class="tdesign">{{ $item->remaining }}</td>
+                                    <td class="tdesign">
+                                        @if($item->hasMedia('images'))
+                                            <img class="enlarge-image" width="60px" src="{{ asset('storage/' . $item->getFirstMedia('images')->id . '/' . $item->getFirstMedia('images')->file_name) }}" />
+
+                                        @endif
+                                    </td>
 
                                 </tr>
                                 @endforeach

@@ -102,21 +102,23 @@
                                     <td class="tdesign" style="width: 10px !important">{{ $order->discounts()->sum('value') }}</td>
                                     <td class="tdesign" style="width: 10px !important">{{ $order->additions()->sum('value') }}</td>
                                     <td class="tdesign" style="width: 10px !important">{{ $order->remaining }}</td>
-                                    <td class="tdesign">
-                                        {{--  @if(auth()->user()->department->id == 5 &&  optional($order->status)->name == 'Pending')
-                                        @can('Edit Orders')
+                                    <td class="tdesign no-print">
+
+                                        {{--  @can('Edit Orders')
                                         <a href="{{ route('backend.orders.edit',$order->id) }}" class="bluebutton"><i
                                                 class="fa fa-edit"></i></a>&nbsp;
-                                        @endcan
-                                        @endif  --}}
+                                        @endcan  --}}
 
+                                        @can('Edit Orders')
                                         @if(in_array(auth()->user()->department->id, [1, 2, 3, 4, 5, 6, 7, 8]))
-                                            @if(auth()->user()->department->id == 5 && optional($order->status)->name == 'Pending')
+                                            @if(auth()->user()->department->id == 5 && $order->status == 'Pending')
                                                 <a href="{{ route('backend.orders.edit', $order->id) }}" class="bluebutton"><i class="fa fa-edit"></i></a>&nbsp;
                                             @elseif(auth()->user()->department->id != 5)
                                                 <a href="{{ route('backend.orders.edit', $order->id) }}" class="bluebutton"><i class="fa fa-edit"></i></a>&nbsp;
                                             @endif
+
                                         @endif
+                                        @endcan
                                         @can('Assign Task Orders')
                                         <a href="{{ route('backend.orders.assignTask',$order->id) }}"
                                             class="purplebutton"><i class="fa fa-user-plus"></i></a>&nbsp;

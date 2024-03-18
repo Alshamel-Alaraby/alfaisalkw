@@ -32,7 +32,7 @@
                 <div class="kt-portlet__body kt-portlet__body--fit">
                     <div class="col-xl-12 order-lg-2 order-xl-1">
                         @include('backend.layouts.partial.error')
-                        <form action="{{ route('backend.clients.store') }}" method="post" enctype="multipart/form-data">
+                        <form id="addPersonForm" action="{{ route('backend.clients.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @include('backend.clients._form')
                         </form>

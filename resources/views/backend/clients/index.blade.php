@@ -59,9 +59,9 @@
                                     <td class="tdesign">{{ $client->address }}</td>
                                     <td class="tdesign">
 
-                                        @can('Show Clients')
+                                        {{--  @can('Show Clients')
                                             <a href="{{ route('backend.clients.show',$client->id) }}" class="pinkbutton"><i class="fa fa-eye"></i></a>&nbsp;
-                                        @endcan
+                                        @endcan  --}}
 
                                         @can('Edit Clients')
                                             <a href="{{ route('backend.clients.edit',$client->id) }}" class="bluebutton" ><i class="fa fa-edit"></i></a>&nbsp;

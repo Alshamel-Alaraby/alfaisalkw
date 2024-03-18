@@ -44,5 +44,7 @@
 
 @include('backend.layouts.partial.script')
 <iframe src="about:blank" style="display: none;"></iframe>
+
+
 </body>
 </html>

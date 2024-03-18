@@ -14,6 +14,7 @@
             <label for="client_id">العميل</label>
             <div class="input-group">
                 <select name="client_id" id="client_id" class="form-control select2" required>
+
                     <option value="">--- إختر العميل ---</option>
                     @foreach ($clients as $client)
                     <option mobile="{{$client->mobile}}" address="{{$client->address}}" @if($client->
@@ -59,7 +60,9 @@
             <label for="order_day">اليوم</label>
             <input type="date" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')"
                 value="{{ old('day', $order->day??date(" Y-m-d")) }}" required>
-                {{--  <input type="text" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')" value="{{ old('day', $order->day ? \Carbon\Carbon::createFromFormat('Y-m-d', $order->day)->format('d/m/Y') : date('d/m/Y')) }}" required onfocus="(this.type='date')" onblur="(this.type='text')" pattern="\d{2}/\d{2}/\d{4}">  --}}
+            {{-- <input type="text" name="day" id="order_day" class="form-control" placeholder="@lang('tr.Date')"
+                value="{{ old('day', $order->day ? \Carbon\Carbon::createFromFormat('Y-m-d', $order->day)->format('d/m/Y') : date('d/m/Y')) }}"
+                required onfocus="(this.type='date')" onblur="(this.type='text')" pattern="\d{2}/\d{2}/\d{4}"> --}}
 
 
 
@@ -68,8 +71,8 @@
     <div class="col-lg-6">
         <div class="form-group">
             <label for="order_from">الوقت من</label>
-            <input type="time" name="start_time" value="{{ old('start_time', $order->start_time ) }}" id="order_from" class="form-control"
-                placeholder="@lang('tr.From')" required>
+            <input type="time" name="start_time" value="{{ old('start_time', $order->start_time ) }}" id="order_from"
+                class="form-control" placeholder="@lang('tr.From')" required>
         </div>
 
 
@@ -78,8 +81,8 @@
     <div style="display: none;" class="col-lg-4">
         <div class="form-group">
             <label for="order_to">الوفت إلى</label>
-            <input type="time" name="end_time" value="{{ old('end_time', $order->end_time ) }}" id="order_to" class="form-control"
-                placeholder="@lang('tr.To')">
+            <input type="time" name="end_time" value="{{ old('end_time', $order->end_time ) }}" id="order_to"
+                class="form-control" placeholder="@lang('tr.To')">
         </div>
 
     </div>
@@ -109,7 +112,8 @@
 
 
             <select name="delegator_id" id="delegator_id" class="form-control select2">
-                @if(count(auth('admin')->user()->roles) >= 3 && auth('admin')->user()->roles[0]->id != 1 && auth('admin')->user()->roles[2]->id != 1)
+                @if(count(auth('admin')->user()->roles) >= 3 && auth('admin')->user()->roles[0]->id != 1 &&
+                auth('admin')->user()->roles[2]->id != 1)
 
                 <option @if(auth('admin')->user()->id==$order->delegator_id) selected @endif value="{{
                     auth('admin')->user()->id }}">{{ auth('admin')->user()->name }}</option>
@@ -253,8 +257,8 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label>قيمة العقد</label>
-            <input id="mainAmount" onchange="setMainAmount(this)" type="number" value="{{ old('total', $order->total ) }}"
-                name="total" class="form-control orderTotal0" required>
+            <input id="mainAmount" onchange="setMainAmount(this)" type="number"
+                value="{{ old('total', $order->total ) }}" name="total" class="form-control orderTotal0" required>
 
 
         </div>
@@ -305,7 +309,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>دفعة سداد</label><input type="number" onchange="calcPayments()"
-                            value="{{ old('value', $payment->value ) }}" name="payments[{{$payment->id}}][value]"
+                                value="{{ old('value', $payment->value ) }}" name="payments[{{$payment->id}}][value]"
                                 class="form-control paymentAmount" placeholder="دفعة سداد">
 
 
@@ -313,7 +317,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>رقم السند</label><input type="text" value="{{ old('receipt_number', $payment->receipt_number ) }}"
+                            <label>رقم السند</label><input type="text"
+                                value="{{ old('receipt_number', $payment->receipt_number ) }}"
                                 name="payments[{{$payment->id}}][receipt_number]" class="form-control"
                                 placeholder="رفم السند">
 
@@ -322,7 +327,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>تاريخ السند</label><input type="date" value="{{ old('receipt_date', $payment->receipt_date ) }}"
+                            <label>تاريخ السند</label><input type="date"
+                                value="{{ old('receipt_date', $payment->receipt_date ) }}"
                                 name="payments[{{$payment->id}}][receipt_date]" class="form-control"
                                 placeholder="تاريخ السند">
 
@@ -351,9 +357,10 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>مبلغ الاضافة</label><input type="number" value="{{ old('value', $addition->value ) }}"
-                                onchange="calcAdditions()" name="addition_amounts[{{$addition->id}}][value]"
-                                class="form-control additionAmount" placeholder="مبلغ الاضافة">
+                            <label>مبلغ الاضافة</label><input type="number"
+                                value="{{ old('value', $addition->value ) }}" onchange="calcAdditions()"
+                                name="addition_amounts[{{$addition->id}}][value]" class="form-control additionAmount"
+                                placeholder="مبلغ الاضافة">
 
 
                         </div>
@@ -388,9 +395,9 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>مبلغ الخصم</label>
-                            <input type="number" value="{{ old('value', $discount->value ) }}" onchange="calcDiscounts()"
-                                name="discount_amounts[{{$discount->id}}][value]" class="form-control discountAmount"
-                                placeholder="مبلغ الخصم">
+                            <input type="number" value="{{ old('value', $discount->value ) }}"
+                                onchange="calcDiscounts()" name="discount_amounts[{{$discount->id}}][value]"
+                                class="form-control discountAmount" placeholder="مبلغ الخصم">
 
 
 
@@ -424,13 +431,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 
 
 
@@ -487,6 +487,9 @@
     </button>
     <a href="" class="btn btn-primary"><i class="fa fa-money"></i> متابعة السداد</a>
 </div>
+
+
+
 @push('js')
 <script>
     $(document).on("change","#client_id",function(e){

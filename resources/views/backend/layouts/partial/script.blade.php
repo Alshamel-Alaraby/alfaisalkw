@@ -58,22 +58,20 @@
 <script src="{{asset('backend')}}/calendar/main4.js"></script>
 <script src="{{asset('backend')}}/calendar/main5.js"></script>--}}
 <!-- Select2 -->
-{{--  <script src="{{asset('backend')}}/select2/js/select2.full.min.js"></script>  --}}
+<script src="{{asset('backend')}}/select2/js/select2.full.min.js"></script>
 
 
 
-{{--  <script src="{{asset('')backend/js/printThis.js')"></script>  --}}
+{{-- <script src="{{asset('')backend/js/printThis.js')"></script> --}}
 
- {{--  <script src="{{ asset('backend/js/printThis.js') }}"></script>  --}}
+{{-- <script src="{{ asset('backend/js/printThis.js') }}"></script> --}}
 
 <!-- Include printThis.js library -->
- {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"></script>
-  --}}
+--}}
 
 <script>
-
-
     {{--  function printTable() {
         $('#clientSideDataTable_wrapper').printThis({
             importCSS: true, // Import CSS for better styling in print
@@ -107,11 +105,14 @@
         toastr.error("{{session('alert-danger')}}");
     @endif
     $(".select2").select2();
+
     $('body').on('click', '[data-toggle="modal"]', function(){
         var animation = $($(this).data("target")).attr('rel');
         $($(this).data("target")+' .modal-dialog').attr('class', 'modal-lg modal-dialog animated '+animation);
         $($(this).data("target")+' .modal-body').load($(this).data("remote"));
+
     });
+
     // $("#addPersonModal").on("show.bs.modal", function(e) {
     //     e.preventDefault();
     //     var link = $(e.relatedTarget);
@@ -172,9 +173,6 @@
         $("ul.kt-menu__nav  li.kt-menu__item--active").removeClass('kt-menu__item--active');
         $('a[href="'+current+'"]').closest('li').addClass('kt-menu__item--active');
     });
-
-
-
 
 
 

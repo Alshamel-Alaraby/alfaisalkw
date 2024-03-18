@@ -12,7 +12,7 @@ class ClientController extends BaseController
 
     public function index()
     {
-        $list = Client::all();
+        $list = Client::orderBy('id','desc')->get();
         return view('backend.clients.index',compact('list'));
     }
 

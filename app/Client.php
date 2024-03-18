@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,7 +16,7 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'mobile','address', 'password',
+        'name', 'email', 'mobile', 'address', 'password', 'national_id_number',
     ];
 
     /**
@@ -40,10 +39,11 @@ class Client extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = $this->preventAttrSet?$password:bcrypt($password);
+        $this->attributes['password'] = $this->preventAttrSet ? $password : bcrypt($password);
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 }
