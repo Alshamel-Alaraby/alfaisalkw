@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             @foreach ($errors->all() as $error)
-                <h6 style="color:#e74c3c;">{{ $error }}</h6>
+                <h6 style="color:#e74c3c;">{!! $error !!}</h6>
             @endforeach
         </div>
     </div>

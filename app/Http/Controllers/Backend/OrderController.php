@@ -73,13 +73,7 @@ class OrderController extends BaseController
             DB::beginTransaction();
             $input = $request->except('_token');
             $input['contract_number'] = str_replace(['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'], ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], $input['contract_number']);
-
-            foreach ($input['detail'] as $item) {
-                $itm = Item::query()->where('type', 'decor')->find($item['item_id']);
-                if ($itm && $item['qty'] && $itm->availableQty($input['day']) < $item['qty']) {
-                    throw new \Exception("الكمية المطلوبة من $itm->name لا تكفي");
-                }
-            }
+            $this->qtyCheck($input);
             $order = Order::create($input);
             $order->details()->attach($input['detail']);
             $order->setStatus(request('status'), request('comment'));
@@ -129,14 +123,31 @@ class OrderController extends BaseController
         return view('backend.orders.edit', compact('order', 'selectedProd', 'selectedEq', 'selectedDocor', 'selectedBuffet'));
     }
 
+    public function qtyCheck($input)
+    {
+        $errors = collect();
+        foreach ($input['detail'] as $item) {
+            $itm = Item::query()->where('type', 'decor')->find($item['item_id']);
+            if ($itm && $item['qty'] && $itm->availableQty($input['day']) < $item['qty']) {
+                $errors->push("الكمية المطلوبة من $itm->name لا تكفي");
+            }
+        }
+        if ($errors->isNotEmpty()) {
+            throw new \Exception($errors->implode('<br>'));
+        }
+
+    }
+
     public function update(OrderRequest $request, Order $order)
     {
 
         try {
             DB::beginTransaction();
             $input = $request->except('_token', '_method');
+            $this->qtyCheck($input);
             $oldStatus = $order->status;
             $order->update($input);
+
 
             foreach ($order->details as $item) {
                 if (!$item->observe_qty) {
@@ -245,6 +256,7 @@ class OrderController extends BaseController
         $statuses = Status::toArray();
         return view('backend.orders.change_status', compact('order', 'statuses'));
     }
+
     public function assignTask(Order $order)
     {
         if (request()->isMethod('POST')) {
